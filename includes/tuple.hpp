@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 16:36:17 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/04 18:24:53 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/04 18:46:01 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 # include "basics.hpp"
 # include "variadics.hpp"
 
+# define M_TUPLE(...)	(__VA_ARGS__)
+
 # define M_TUPLE_REM(...) __VA_ARGS__
 # define M_TUPLE_SIZE(tuple)	M_DEFER(M_VA_ARGS_SIZE M_TUPLE_REM(tuple))
-# define M_TUPLE_EMPTY(tuple)	M_DEFER(M_VA_ARGS_IS_EMPTY M_TUPLE_REM(tuple))
+# define M_TUPLE_EMPTY(tuple)	M_DEFER(M_IS_EMPTY M_TUPLE_REM(tuple))
 
 # define M_TUPLE_ELEMENT(i, tuple) M_DEFER(M_CAT(_M_TUPLE_ELEM_, i) M_TUPLE_REM(tuple))
 
 # define M_TUPLE_HEAD(tuple)	M_DEFER(M_HEAD M_TUPLE_REM(tuple))
 # define M_TUPLE_TAIL(tuple)	M_DEFER(M_TAIL M_TUPLE_REM(tuple))
 # define M_TUPLE_LAST(tuple)	M_TUPLE_ELEMENT(M_DEC(M_TUPLE_SIZE(tuple)), tuple)
-
-# define M_TUPLE(...)	(__VA_ARGS__)
 
 # define M_TUPLE_PUSH(tuple, ...)	\
 	M_IF(M_TUPLE_EMPTY(tuple))	\
@@ -42,6 +42,8 @@
 		M_TUPLE(__VA_ARGS__), \
 		M_TUPLE( __VA_ARGS__, M_TUPLE_REM tuple)	\
 	)
+
+# define M_TUPLE_POP(tuple)	
 
 # define _M_TUPLE_ELEM_0(a0,...) a0
 # define _M_TUPLE_ELEM_1(a0,a1,...) a1

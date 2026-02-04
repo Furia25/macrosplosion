@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:53:04 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/04 18:24:06 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/04 19:11:20 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@
 #define M_BOOL(x) M_COMPL(M_NOT(x))
 #define M_IF(c) M_IFF(M_BOOL(c))
 
-#define M_HEAD(x, ...) x
-#define M_TAIL(x, ...) __VA_ARGS__
+#define M_HEAD(x, ...)	x
+#define M_TAIL(x, ...)	__VA_ARGS__
 
 #define M_EAT(...)
 #define M_WHEN(c) M_IF(c)(M_EXPAND, M_EAT)
@@ -91,8 +91,24 @@
 		) \
 	)
 
-#define M_COMMA	,
+#define M_COMMA()	,
 #define M_MAX_INT	1024
 #define M_MIN_INT	0
+
+#define _M_POP_INDIRECT()	_M_POP_
+#define _M_POP_(flag, ...) \
+	M_IF(M_IS_EMPTY(M_TAIL(__VA_ARGS__))) \
+	( \
+		/*EMPTY*/\
+	, \
+		M_IFF(flag)\
+		(\
+			M_COMMA() M_HEAD(__VA_ARGS__)\
+			,\
+			M_HEAD(__VA_ARGS__)\
+		)\
+		M_OBSTRUCT(_M_POP_INDIRECT)()(1, M_TAIL(__VA_ARGS__))\
+	)
+#define M_POP(...)	M_EVAL(_M_POP_(0, __VA_ARGS__))
 
 #endif // _MACROSPLOSION_BASICS_H
