@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:53:04 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/04 02:40:22 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/04 18:24:06 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 #define M_DEFER(id) id M_EMPTY()
 #define M_OBSTRUCT(id) id M_DEFER(M_EMPTY)()
 #define M_EXPAND(...) __VA_ARGS__
-
+#define _M_IDENTITY_(x)	x
+#define M_IDENTITY(x)	_M_IDENTITY_(x)
 #define M_EVAL(...) _M_EVAL1024(__VA_ARGS__)
 
 #define _M_EVAL1024(...) _M_EVAL512(_M_EVAL512(__VA_ARGS__))
@@ -70,6 +71,9 @@
 #define M_BOOL(x) M_COMPL(M_NOT(x))
 #define M_IF(c) M_IFF(M_BOOL(c))
 
+#define M_HEAD(x, ...) x
+#define M_TAIL(x, ...) __VA_ARGS__
+
 #define M_EAT(...)
 #define M_WHEN(c) M_IF(c)(M_EXPAND, M_EAT)
 
@@ -88,5 +92,7 @@
 	)
 
 #define M_COMMA	,
+#define M_MAX_INT	1024
+#define M_MIN_INT	0
 
 #endif // _MACROSPLOSION_BASICS_H
