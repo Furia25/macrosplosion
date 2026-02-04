@@ -6,7 +6,7 @@
 #    By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2026/02/03 17:02:09 by vdurand          ###   ########.fr        #
+#    Updated: 2026/02/04 01:44:54 by vdurand          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -131,7 +131,19 @@ fclean: clean fcleanlibs
 
 re: fclean all
 
+# ----------------------
+# Preprocessing rule
+# ----------------------
+
+$(OBJ_DIR)/%.i: $(SRC_DIR)/%.cpp
+	$(SILENT) mkdir -p $(dir $@)
+	@$(LOG) "$(CYAN)>>> Preprocessing $<...$(RESET)"
+	$(SILENT) $(CXX) $(CXXFLAGS) $(INC_FLAGS) -E $< -o $@
+
+preproc: $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.i)
+	@$(LOG) "$(GREEN)>>> Preprocessing done!$(RESET)"
+
 # Targets
-.PHONY: all clean fclean re fcleanlibs
+.PHONY: all clean fclean re fcleanlibs preproc
 
 -include $(DEP)

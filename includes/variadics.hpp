@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:22:26 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/03 20:22:42 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/04 01:19:45 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@
 
 #define _M_HAS_COMMA(...) M_IDENTITY(_M_VA_ARGS_TAIL(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0))
 
-#define M_VA_ARGS_IS_EMPTY(...) _M_VA_ARGS_IS_EMPTY_(									\
-	_M_HAS_COMMA(__VA_ARGS__),												\
-	_M_HAS_COMMA(M_COMMA __VA_ARGS__),				\
-	_M_HAS_COMMA(__VA_ARGS__(/*EMPTY*/)),									\
+#define M_VA_ARGS_IS_EMPTY(...) _M_VA_ARGS_IS_EMPTY_(	\
+	_M_HAS_COMMA(__VA_ARGS__),							\
+	_M_HAS_COMMA(M_COMMA __VA_ARGS__),					\
+	_M_HAS_COMMA(__VA_ARGS__(/*EMPTY*/)),				\
 	_M_HAS_COMMA(M_COMMA __VA_ARGS__ (/*EMPTY*/)))
 
 #define _M_VA_ARGS_IS_EMPTY_(_0, _1, _2, _3) _M_HAS_COMMA(_M_CAT5_(_IS_EMPTY_IS_EMPTY_CASE_, _0, _1, _2, _3))
