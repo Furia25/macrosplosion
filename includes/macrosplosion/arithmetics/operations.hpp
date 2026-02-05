@@ -6,15 +6,18 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:16:31 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/04 16:09:45 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/05 14:57:49 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _MACROSPLOSION_OPERATIONS_H
 # define _MACROSPLOSION_OPERATIONS_H
 
-# include "arithmetics/decrements.hpp"
-# include "arithmetics/increments.hpp"
+# include "decrements.hpp"
+# include "increments.hpp"
+
+#define M_INC(x)	M_PRIMITIVE_CAT(_M_INC_, x)
+#define M_DEC(x)	M_PRIMITIVE_CAT(_M_DEC_, x)
 
 #define M_SUB_I(a,b) \
 	M_IF(b) \

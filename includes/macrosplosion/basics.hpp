@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:53:04 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/05 00:40:54 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/05 14:57:40 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@
 #define _M_BITAND_0(y) 0
 #define _M_BITAND_1(y) y
 #define M_BITAND(x) M_PRIMITIVE_CAT(_M_BITAND_, x)
-
-#define M_INC(x)	M_PRIMITIVE_CAT(_M_INC_, x)
-#define M_DEC(x)	M_PRIMITIVE_CAT(_M_DEC_, x)
 
 #define _M_CHECK_N_(x, n, ...) n
 #define M_CHECK(...) _M_CHECK_N_(__VA_ARGS__, 0,)
