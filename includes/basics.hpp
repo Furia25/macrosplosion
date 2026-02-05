@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:53:04 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/04 19:11:20 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/05 00:40:54 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,10 @@
 
 #define M_EAT(...)
 #define M_WHEN(c) M_IF(c)(M_EXPAND, M_EAT)
+#define M_ELSE(c) M_IF(c)(M_EAT, M_EXPAND)
 
-#define _M_REPEAT_INDIRECT() M_REPEAT
-#define M_REPEAT(count, macro, ...) \
+#define _M_REPEAT_INDIRECT() _M_REPEAT
+#define _M_REPEAT(count, macro, ...) \
 	M_WHEN(count) \
 	( \
 		M_OBSTRUCT(_M_REPEAT_INDIRECT) () \
@@ -90,6 +91,7 @@
 			M_DEC(count), __VA_ARGS__ \
 		) \
 	)
+#define M_REPEAT(count, macro, ...)	M_EVAL(_M_REPEAT(count, macro, __VA_ARGS__))
 
 #define M_COMMA()	,
 #define M_MAX_INT	1024
@@ -97,10 +99,8 @@
 
 #define _M_POP_INDIRECT()	_M_POP_
 #define _M_POP_(flag, ...) \
-	M_IF(M_IS_EMPTY(M_TAIL(__VA_ARGS__))) \
-	( \
-		/*EMPTY*/\
-	, \
+	M_ELSE(M_IS_EMPTY(M_TAIL(__VA_ARGS__))) \
+	(\
 		M_IFF(flag)\
 		(\
 			M_COMMA() M_HEAD(__VA_ARGS__)\
@@ -110,5 +110,14 @@
 		M_OBSTRUCT(_M_POP_INDIRECT)()(1, M_TAIL(__VA_ARGS__))\
 	)
 #define M_POP(...)	M_EVAL(_M_POP_(0, __VA_ARGS__))
+
+#define _M_FOREACH_INDIRECT()	_M_FOREACH
+#define _M_FOREACH(macro, data, ...)	\
+	M_ELSE(M_IS_EMPTY(M_HEAD(__VA_ARGS__))) \
+	(\
+		M_OBSTRUCT(macro)(M_HEAD(__VA_ARGS__), M_TUPLE_REM data)\
+		M_OBSTRUCT(_M_FOREACH_INDIRECT)()(macro, data, M_TAIL(__VA_ARGS__))\
+	)
+#define M_FOREACH(macro, data, ...)	M_EVAL(_M_FOREACH(macro, data, __VA_ARGS__))
 
 #endif // _MACROSPLOSION_BASICS_H

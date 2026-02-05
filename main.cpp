@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:01:25 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/04 19:32:56 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/05 01:02:15 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@
 		if (!(C1)) \
 			throw (C2);\
 	} while(0)
-	
+
+#define test_m(x, a, b, c, ...)	x##a##b##c
+#define test (1, 2, 3, 4)
+
 int	main(void)
 {
-	std::cout << M_VA_ARGS_SIZE(1, 5, 8, (4, 8, 8, 9, 7, 4, 1, 5), (template<typename T, typename C>)) << std::endl;
+	std::cout << M_STR(M_FOREACH(test_m, (a, b, c), 1, 2, 3, 4)) << std::endl;
 	
 }

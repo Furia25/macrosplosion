@@ -6,7 +6,7 @@
 #    By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2026/02/04 01:44:54 by vdurand          ###   ########.fr        #
+#    Updated: 2026/02/05 01:01:57 by vdurand          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ else
 endif
 
 # Project
-NAME = webserv
+NAME = test
 SRC_DIR = ./
 OBJ_DIR = obj
 INC_DIR = includes
