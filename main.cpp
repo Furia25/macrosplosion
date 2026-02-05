@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 17:01:25 by vdurand           #+#    #+#             */
-/*   Updated: 2026/02/05 01:02:15 by vdurand          ###   ########.fr       */
+/*   Updated: 2026/02/05 17:45:27 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 
 int	main(void)
 {
-	std::cout << M_STR(M_FOREACH(test_m, (a, b, c), 1, 2, 3, 4)) << std::endl;
+	std::cout << M_VA_ARGS_SIZE(17, 8, 9) << std::endl;
 	
 }
